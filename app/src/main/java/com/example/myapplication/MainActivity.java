@@ -21,6 +21,7 @@ import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
 import com.esri.android.map.event.OnStatusChangedListener;
 import com.esri.android.map.ogc.WMSLayer;
 import com.esri.android.map.ogc.WMSLayerInfo;
+import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polygon;
 import com.esri.android.runtime.ArcGISRuntime.License;
 import com.esri.android.map.ogc.WMSLayer;
@@ -32,7 +33,7 @@ import com.esri.core.tasks.ags.geoprocessing.Geoprocessor;
 import java.security.cert.X509Certificate;
 
 public class MainActivity extends AppCompatActivity {
-    private MapView mMapView;
+    Point cpoint = new Point(57.1630758, -2.07151918);
   //  MapView mMapView = null;
     String wmsURL= "https://digimap.edina.ac.uk/mapproxy/wms/marine-licensed/ba8fb3c71d88497dfad791633238b0c6091c2a5e99d531079f30c1e8906fdddb";
     @Override
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
        // setContentView(R.layout.activity_main);
        // Toolbar toolbar = findViewById(R.id.toolbar);
       //  MapView mMapView = findViewById(R.id.map);
-        MapOptions topo = new MapOptions(MapOptions.MapType.TOPO, 57.1630758, -2.0715198, 10);
+      //  MapOptions topo = new MapOptions(MapOptions.MapType.TOPO, 57.1630758, -2.0715198, 9);
 
 // Set listener to handle self-signed certificate
         SelfSignedCertificateHandler.setOnSelfSignedCertificateListener(
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
         WMSLayer wmsLayer = new WMSLayer(wmsURL);
       // mMapView.removeAll();
       //mMapView.addLayer(wmsLayer);
-      MapView mv = new MapView(this, topo);
+      //MapView mv = new MapView(this, topo);
+        MapView mv = new MapView(this);
+      mv.zoomToScale(cpoint, 1000000 );
+
         mv.addLayer(wmsLayer);
        setContentView(mv);
         //setSupportActionBar(toolbar);
